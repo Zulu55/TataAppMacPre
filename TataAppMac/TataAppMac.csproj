@@ -44,6 +44,15 @@
     <EmbeddedResource Include="Views\TimesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewTimePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewTimeTimePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewTimeRepeatsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -84,6 +93,16 @@
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Time.cs" />
     <Compile Include="ViewModels\TimeItemViewModel.cs" />
+    <Compile Include="Views\NewTimePage.xaml.cs">
+      <DependentUpon>NewTimePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NewTimeViewModel.cs" />
+    <Compile Include="Views\NewTimeTimePage.xaml.cs">
+      <DependentUpon>NewTimeTimePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewTimeRepeatsPage.xaml.cs">
+      <DependentUpon>NewTimeRepeatsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

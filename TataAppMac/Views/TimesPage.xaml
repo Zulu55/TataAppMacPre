@@ -10,10 +10,19 @@
         <StackLayout
             BindingContext="{Binding Times}"
             Padding="8">
+            <SearchBar
+                HeightRequest="35"
+                Placeholder="Search..."
+                Text="{Binding Filter, Mode=TwoWay}"
+                SearchCommand="{Binding SearchCommand}">
+            </SearchBar>    
             <ListView
                 BackgroundColor="{StaticResource BackgroundColor}"
                 ItemsSource="{Binding MyTimes}" 
-                HasUnevenRows="True">
+                HasUnevenRows="True"
+                IsPullToRefreshEnabled="True"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -58,4 +67,9 @@
             </ListView>
         </StackLayout>
 	</ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Icon="ic_action_add_circle.png"
+            Command="{Binding NewTimeCommand}"/>
+    </ContentPage.ToolbarItems>
 </ContentPage>

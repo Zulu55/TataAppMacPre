@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="TataAppMac.Views.NewTimeRepeatsPage"
+    Title="Repeats"
+    Icon="ic_action_repeat.png"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+	<ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding NewTime}">
+            <StackLayout
+                Padding="8">
+                <Label
+                    FontSize="Large"
+                    Text="Repeats">
+                </Label>
+            </StackLayout>
+        </ScrollView>
+	</ContentPage.Content>
+</ContentPage>

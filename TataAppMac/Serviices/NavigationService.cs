@@ -29,6 +29,9 @@ namespace TataAppMac.Serviices
 				case "TimesPage":
 					await App.Navigator.PushAsync(new TimesPage());
 					break;
+				case "NewTimePage":
+					await App.Navigator.PushAsync(new NewTimePage());
+					break;
 				default:
 					break;
 			}
