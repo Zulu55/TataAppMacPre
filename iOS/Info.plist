@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>TataAppMacPre</string>
+	<string>TataAppMac</string>
 	<key>CFBundleName</key>
-	<string>TataAppMacPre</string>
+	<string>TataAppMac</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.zulu_software.tataappmacpre</string>
+	<string>com.zulu_software.tataappmac</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>

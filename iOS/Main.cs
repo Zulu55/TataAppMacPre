@@ -5,7 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 
-namespace TataAppMacPre.iOS
+namespace TataAppMac.iOS
 {
     public class Application
     {
