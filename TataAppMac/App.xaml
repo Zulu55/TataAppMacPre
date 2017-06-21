@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Application 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:infra="clr-namespace:TataAppMac.Infrastructure;assembly=TataAppMac"
+    x:Class="TataAppMac.App">
+	<Application.Resources>
+        <ResourceDictionary>
+
+            <!-- Locator -->
+            <infra:InstanceLocator x:Key="Locator"></infra:InstanceLocator>
+
+            <!-- Parameters -->
+            <x:String x:Key="URLAPI">http://tataappapi.azurewebsites.net</x:String>
+            <x:String x:Key="URLBackend">http://tataappbackend.azurewebsites.net</x:String>
+
+            <!-- Colors -->
+            <Color x:Key="MainColor">#2980B9</Color>
+            <Color x:Key="FontColor">#2C3E50</Color>
+            <Color x:Key="AccentColor1">#E74C3C</Color>
+            <Color x:Key="AccentColor2">#3498DB</Color>
+            <Color x:Key="BackgroundColor">#ECF0F1</Color>
+            
+            <!-- Menu colors -->
+            <Color x:Key="MenuColor">#E74C3C</Color>
+            <Color x:Key="MenuFontColor">#ECF0F1</Color>
+            
+        </ResourceDictionary>
+	</Application.Resources>
+</Application>

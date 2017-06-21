@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="TataAppMac.Views.TimesPage"
+    Title="My Times"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+	<ContentPage.Content>
+        <StackLayout
+            BindingContext="{Binding Times}"
+            Padding="8">
+            <ListView
+                BackgroundColor="{StaticResource BackgroundColor}"
+                ItemsSource="{Binding MyTimes}" 
+                HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding EditTimeCommand}"/>
+                                </Grid.GestureRecognizers>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackLayout
+                                    Grid.Column="0">
+                                    <Label
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource FontColor}"
+                                        Text="{Binding DateReported, StringFormat='{0:dd/MMMM/yyyy}'}}">
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        TextColor="{StaticResource FontColor}"
+                                        Text="{Binding FromTo}">
+                                    </Label>
+                                    <Label
+                                        TextColor="{StaticResource FontColor}"
+                                        Text="{Binding Project.Description}">
+                                    </Label>
+                                    <Label
+                                        TextColor="{StaticResource FontColor}"
+                                        Text="{Binding ActivityTime}">
+                                    </Label>
+                                </StackLayout>
+                                <Image 
+                                    Grid.Column="1"
+                                    Source="ic_chevron_right.png">
+                                </Image>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+	</ContentPage.Content>
+</ContentPage>

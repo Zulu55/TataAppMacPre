@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MasterDetailPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:pages="clr-namespace:TataAppMac.Views;assembly=TataAppMac"
+    x:Class="TataAppMac.Views.MasterPage">
+    <MasterDetailPage.Master>
+        <pages:MenuPage/>
+    </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <NavigationPage
+            BarBackgroundColor="{StaticResource MainColor}"
+            BarTextColor="{StaticResource BackgroundColor}"
+            x:Name="Navigator">
+        <x:Arguments>
+            <pages:HomePage/>
+        </x:Arguments>
+    </NavigationPage>
+    </MasterDetailPage.Detail>
+</MasterDetailPage>
