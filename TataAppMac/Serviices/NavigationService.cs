@@ -37,5 +37,9 @@ namespace TataAppMac.Serviices
 			}
 		}
 
-	}
+		public async Task Back()
+		{
+			await App.Current.MainPage.Navigation.PopAsync();
+		}
+    }
 }

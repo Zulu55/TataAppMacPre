@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Windows.Input;
+using GalaSoft.MvvmLight.Command;
 using TataAppMac.Models;
 using TataAppMac.Serviices;
+using Xamarin.Forms;
 
 namespace TataAppMac.ViewModels
 {
@@ -29,7 +34,31 @@ namespace TataAppMac.ViewModels
 		#endregion
 
 		#region Properties
-        public DateTime Until
+		public ObservableCollection<ProjectItemViewModel> Projects
+		{
+			get;
+			set;
+		}
+
+		public ObservableCollection<ActivityItemViewModel> Activities
+		{
+			get;
+			set;
+		}
+
+		public string FromString
+		{
+			get;
+			set;
+		}
+
+		public string ToString
+		{
+			get;
+			set;
+		}
+
+		public DateTime Until
         {
             get;
             set;
@@ -239,10 +268,77 @@ namespace TataAppMac.ViewModels
             IsEnabled = true;
             Until = DateTime.Now;
             DateReported = DateTime.Now;
+
+            Projects = new ObservableCollection<ProjectItemViewModel>();
+            Activities = new ObservableCollection<ActivityItemViewModel>();
+
+            LoadPickers();
 		}
 		#endregion
 
 		#region Methods
+		private async void LoadPickers()
+        {
+            IsEnabled = false;
+            IsRunning = true;
+
+			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+            var mainViewModel = MainViewModel.GetInstance();
+            var employee = mainViewModel.Employee;
+
+			var projects = await apiService.GetList<Project>(
+				urlAPI,
+				"/api",
+				"/Projects",
+				employee.TokenType,
+				employee.AccessToken);
+
+            if (projects.IsSuccess)
+            {
+                ReloadProjects((List<Project>)projects.Result);
+            }
+
+			var activities = await apiService.GetList<Activity>(
+            	urlAPI,
+            	"/api",
+            	"/Activities",
+            	employee.TokenType,
+            	employee.AccessToken);
+
+			if (activities.IsSuccess)
+			{
+                ReloadActivities((List<Activity>)activities.Result);
+			}
+
+			IsEnabled = true;
+            IsRunning = false;
+		}
+
+		private void ReloadProjects(List<Project> projects)
+		{
+            Projects.Clear();
+            foreach (var project in projects)
+            {
+                Projects.Add(new ProjectItemViewModel 
+                {
+                    Description = project.Description,
+                    ProjectId = project.ProjectId,
+                });
+            }
+        }
+
+		private void ReloadActivities(List<Activity> activities)
+		{
+			Activities.Clear();
+			foreach (var activity in activities)
+			{
+				Activities.Add(new ActivityItemViewModel
+				{
+					Description = activity.Description,
+					ActivityId = activity.ActivityId,
+				});
+			}
+		}
 
 		private void TurnOffDays()
 		{
@@ -254,6 +350,106 @@ namespace TataAppMac.ViewModels
             IsRepeatSaturday = false;
             IsRepeatSunday = false;
 		}
-		#endregion
-	}
+        #endregion
+
+        #region Commands
+        public ICommand SaveCommand
+        {
+            get { return new RelayCommand(Save); }
+        }
+
+        private async void Save()
+        {
+			if (ProjectId == 0)
+			{
+				await dialogService.ShowMessage("Error", "You must select a project.");
+				return;
+			}
+
+            if (ActivityId == 0)
+			{
+				await dialogService.ShowMessage("Error", "You must select an activity.");
+				return;
+			}
+
+            ConvertHours();
+
+			if (To <= From)
+            {
+				await dialogService.ShowMessage("Error", "The hour 'To' must be greather hour 'From'.");
+				return;
+			}
+
+			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+			var mainViewModel = MainViewModel.GetInstance();
+			var employee = mainViewModel.Employee;
+
+			var newTimeRequest = new NewTimeRequest 
+            {
+                ActivityId = ActivityId,
+                DateReported = DateReported,
+                EmployeeId = employee.EmployeeId,
+                From = From,
+                IsRepeated = IsRepeated,
+                IsRepeatFriday = IsRepeatFriday,
+                IsRepeatMonday = IsRepeatMonday,
+                IsRepeatSaturday = IsRepeatSaturday,
+                IsRepeatSunday = IsRepeatSunday,
+                IsRepeatThursday = IsRepeatThursday,
+                IsRepeatTuesday = IsRepeatTuesday,
+                IsRepeatWednesday = IsRepeatWednesday,
+                ProjectId = ProjectId,
+                Remarks = Remarks,
+                To = To,
+                Until = Until,
+            };
+
+			var response = await apiService.Post(
+				urlAPI,
+				"/api",
+				"/Times",
+				employee.TokenType,
+				employee.AccessToken,
+                newTimeRequest);
+
+            if (!response.IsSuccess)
+            {
+                await dialogService.ShowMessage("Error", response.Message);
+                return;
+            }
+
+            await navigationService.Back();
+		}
+
+        private void ConvertHours()
+        {
+			int posTo = ToString.IndexOf(':');
+			int posFrom = FromString.IndexOf(':');
+            int toHour = 0, toMinute = 0, fromHour = 0, fromMinute = 0;
+
+			if (posTo == -1)
+			{
+				int.TryParse(ToString, out toHour);
+			}
+			else
+			{
+				int.TryParse(ToString.Substring(0, posTo), out toHour);
+				int.TryParse(ToString.Substring(posTo + 1), out toMinute);
+			}
+
+			if (posFrom == -1)
+			{
+				int.TryParse(FromString, out fromHour);
+			}
+			else
+			{
+				int.TryParse(FromString.Substring(0, posFrom), out fromHour);
+				int.TryParse(FromString.Substring(posFrom + 1), out fromMinute);
+			}
+
+			To = new DateTime(1900, 1, 1, toHour, toMinute, 0);
+			From = new DateTime(1900, 1, 1, fromHour, fromMinute, 0);
+		}
+        #endregion
+    }
 }

@@ -1,14 +1,13 @@
-﻿using System.Collections.ObjectModel;
-using TataAppMac.Serviices;
-using TataAppMac.Models;
-using Xamarin.Forms;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
-using System.Threading.Tasks;
-using System;
-using System.Linq;
+using TataAppMac.Models;
+using TataAppMac.Serviices;
+using Xamarin.Forms;
 
 namespace TataAppMac.ViewModels
 {
@@ -60,8 +59,12 @@ namespace TataAppMac.ViewModels
                     {
                         ReloadTimes();
                     }
+                    else
+                    {
+                        Search();
+                    }
 
-					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filter"));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Filter"));
 				}
 			}
 			get

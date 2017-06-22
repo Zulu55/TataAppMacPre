@@ -93,7 +93,7 @@
                                 SelectedValuePath="ActivityId" 
                                 TextColor="{StaticResource FontColor}"
                                 BackgroundColor="White"
-                                ItemsSource="{Binding Projects}" 
+                                ItemsSource="{Binding Activities}" 
                                 SelectedValue="{Binding Path=ActivityId, Mode=TwoWay}" 
                                 HorizontalOptions="FillAndExpand" 
                                 VerticalOptions="Center">
@@ -121,12 +121,13 @@
                             VerticalOptions="Center"
                             TextColor="{StaticResource FontColor}">
                         </Label>
-                        <TimePicker
-                            Time="{Binding From, Mode=TwoWay}"
+                        <Entry
+                            Text="{Binding FromString, Mode=TwoWay}"
+                            Placeholder="hh:mm"
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
-                        </TimePicker>
+                        </Entry>
                     </Grid>
                     <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
@@ -140,12 +141,13 @@
                             VerticalOptions="Center"
                             TextColor="{StaticResource FontColor}">
                         </Label>
-                        <TimePicker
-                            Time="{Binding To, Mode=TwoWay}"
+                        <Entry
+                            Text="{Binding ToString, Mode=TwoWay}"
+                            Placeholder="hh:mm"
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
-                        </TimePicker>
+                        </Entry>
                     </Grid>
                 </Grid>
                 <Grid>
