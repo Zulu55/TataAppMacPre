@@ -171,12 +171,13 @@
                     </Grid>
                 </Grid>
                 <ActivityIndicator
+                    VerticalOptions="CenterAndExpand"
                     IsRunning="{Binding IsRunning}">
                 </ActivityIndicator>
                 <Button
                     Command="{Binding SaveCommand}"
                     IsEnabled="{Binding IsEnabled}"
-                    VerticalOptions="Center"
+                    VerticalOptions="End"
                     HorizontalOptions="FillAndExpand"
                     BackgroundColor="{StaticResource MainColor}"
                     TextColor="{StaticResource BackgroundColor}"
