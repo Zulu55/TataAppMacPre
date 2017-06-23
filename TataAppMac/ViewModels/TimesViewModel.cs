@@ -106,18 +106,11 @@
         {
             IsRefreshing = true;
 
-			if (!CrossConnectivity.Current.IsConnected)
+			var checkConnetion = await apiService.CheckConnection();
+			if (!checkConnetion.IsSuccess)
 			{
                 IsRefreshing = false;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
-				return;
-			}
-
-			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
-			if (!isReachable)
-			{
-				IsRefreshing = false;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				await dialogService.ShowMessage("Error", checkConnetion.Message);
 				return;
 			}
 

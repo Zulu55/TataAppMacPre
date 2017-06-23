@@ -6,7 +6,6 @@
     using System.ComponentModel;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
-    using Plugin.Connectivity;
     using TataAppMac.Models;
     using TataAppMac.Serviices;
     using Xamarin.Forms;
@@ -18,20 +17,21 @@
 		#endregion
 
 		#region Attributes
-		private ApiService apiService;
-		private DialogService dialogService;
-		private NavigationService navigationService;
-		private DataService dataService;
-		private bool isRunning;
-		private bool isEnabled;
-		private bool isRepeated;
-		private bool isRepeatMonday;
-		private bool isRepeatTuesday;
-		private bool isRepeatWednesday;
-		private bool isRepeatThursday;
-		private bool isRepeatFriday;
-		private bool isRepeatSaturday;
-		private bool isRepeatSunday;
+        ApiService apiService;
+        DialogService dialogService;
+        NavigationService navigationService;
+		DataService dataService;
+		GeolocatorService geolocatorService;
+		bool isRunning;
+        bool isEnabled;
+        bool isRepeated;
+        bool isRepeatMonday;
+        bool isRepeatTuesday;
+        bool isRepeatWednesday;
+        bool isRepeatThursday;
+        bool isRepeatFriday;
+        bool isRepeatSaturday;
+        bool isRepeatSunday;
 		#endregion
 
 		#region Properties
@@ -265,6 +265,7 @@
 			dialogService = new DialogService();
 			navigationService = new NavigationService();
 			dataService = new DataService();
+            geolocatorService = new GeolocatorService();
 
             IsEnabled = true;
             Until = DateTime.Now;
@@ -283,20 +284,12 @@
             IsEnabled = false;
             IsRunning = true;
 
-			if (!CrossConnectivity.Current.IsConnected)
+			var checkConnetion = await apiService.CheckConnection();
+			if (!checkConnetion.IsSuccess)
 			{
 				IsRunning = false;
 				IsEnabled = true;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
-				return;
-			}
-
-			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
-			if (!isReachable)
-			{
-				IsRunning = false;
-				IsEnabled = true;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				await dialogService.ShowMessage("Error", checkConnetion.Message);
 				return;
 			}
 
@@ -411,20 +404,12 @@
             IsEnabled = false;
             IsRunning = true;
 
-			if (!CrossConnectivity.Current.IsConnected)
+			var checkConnetion = await apiService.CheckConnection();
+			if (!checkConnetion.IsSuccess)
 			{
 				IsRunning = false;
 				IsEnabled = true;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
-				return;
-			}
-
-			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
-			if (!isReachable)
-			{
-				IsRunning = false;
-				IsEnabled = true;
-				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				await dialogService.ShowMessage("Error", checkConnetion.Message);
 				return;
 			}
 
@@ -432,12 +417,16 @@
 			var mainViewModel = MainViewModel.GetInstance();
 			var employee = mainViewModel.Employee;
 
+            await geolocatorService.GetLocation();
+
 			var newTimeRequest = new NewTimeRequest 
             {
                 ActivityId = ActivityId,
                 DateReported = DateReported,
                 EmployeeId = employee.EmployeeId,
                 From = From,
+                Latitude = geolocatorService.Latitude,
+                Longitude = geolocatorService.Longitude,
                 IsRepeated = IsRepeated,
                 IsRepeatFriday = IsRepeatFriday,
                 IsRepeatMonday = IsRepeatMonday,

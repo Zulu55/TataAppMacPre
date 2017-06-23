@@ -1,8 +1,8 @@
-﻿using System;
-
-namespace TataAppMac.Models
+﻿namespace TataAppMac.Models
 {
-    public class Time
+    using System;
+
+	public class Time
     {
 		public int TimeId { get; set; }
 
@@ -19,6 +19,10 @@ namespace TataAppMac.Models
 		public DateTime From { get; set; }
 
 		public DateTime To { get; set; }
+
+		public double Latitude { get; set; }
+
+        public double Longitude { get; set; }
 
 		public string Remarks { get; set; }
 

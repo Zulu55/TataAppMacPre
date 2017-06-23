@@ -1,17 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using TataAppMac.Models;
-
-namespace TataAppMac.Serviices
+﻿namespace TataAppMac.Serviices
 {
+    using System;
+	using System.Collections.Generic;
+	using System.Net.Http;
+	using System.Net.Http.Headers;
+	using System.Text;
+	using System.Threading.Tasks;
+	using Newtonsoft.Json;
+	using Plugin.Connectivity;
+	using TataAppMac.Models;
+
 	public class ApiService
 	{
-		public async Task<TokenResponse> GetToken(string urlBase, 
+		public async Task<Response> CheckConnection()
+		{
+			if (!CrossConnectivity.Current.IsConnected)
+			{
+				return new Response
+				{
+					IsSuccess = false,
+					Message = "Please turn on your internet.",
+				};
+			}
+
+			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+			if (!isReachable)
+			{
+				return new Response
+				{
+					IsSuccess = false,
+					Message = "Check you internet connection.",
+				};
+			}
+
+			return new Response
+			{
+				IsSuccess = true,
+				Message = "Ok",
+			};
+		}
+
+        public async Task<TokenResponse> GetToken(string urlBase, 
                                                   string username, 
                                                   string password)
 		{
