@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using Plugin.Connectivity;
 using TataAppMac.Models;
 using TataAppMac.Serviices;
 using Xamarin.Forms;
@@ -145,6 +146,23 @@ namespace TataAppMac.ViewModels
 
             IsRunning = true;
             IsEnabled = false;
+
+			if (!CrossConnectivity.Current.IsConnected)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
+			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+			if (!isReachable)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
 
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
 

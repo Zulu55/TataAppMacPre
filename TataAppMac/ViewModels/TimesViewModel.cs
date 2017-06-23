@@ -1,17 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using TataAppMac.Models;
-using TataAppMac.Serviices;
-using Xamarin.Forms;
-
-namespace TataAppMac.ViewModels
+﻿namespace TataAppMac.ViewModels
 {
-    public class TimesViewModel : INotifyPropertyChanged
+    using System.Collections.Generic;
+	using System.Collections.ObjectModel;
+	using System.ComponentModel;
+	using System.Linq;
+	using System.Threading.Tasks;
+	using System.Windows.Input;
+	using GalaSoft.MvvmLight.Command;
+	using Plugin.Connectivity;
+	using TataAppMac.Models;
+	using TataAppMac.Serviices;
+	using Xamarin.Forms;
+
+	public class TimesViewModel : INotifyPropertyChanged
     {
 		#region Events
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -104,6 +105,22 @@ namespace TataAppMac.ViewModels
 		private async Task LoadTimes()
         {
             IsRefreshing = true;
+
+			if (!CrossConnectivity.Current.IsConnected)
+			{
+                IsRefreshing = false;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
+			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+			if (!isReachable)
+			{
+				IsRefreshing = false;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
             var mainViewModel = MainViewModel.GetInstance();
             var employee = mainViewModel.Employee;
@@ -123,7 +140,7 @@ namespace TataAppMac.ViewModels
             }
 
             times = (List<Time>)response.Result;
-            ReloadTimes();
+			ReloadTimes();
 			IsRefreshing = false;
 		}
 

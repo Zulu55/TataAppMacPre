@@ -32,6 +32,9 @@ namespace TataAppMac.Serviices
 				case "NewTimePage":
 					await App.Navigator.PushAsync(new NewTimePage());
 					break;
+				case "TestModelPage":
+                    await App.Current.MainPage.Navigation.PushModalAsync(new TestModelPage(), false);
+					break;
 				default:
 					break;
 			}

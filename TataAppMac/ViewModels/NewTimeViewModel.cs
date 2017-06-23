@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using TataAppMac.Models;
-using TataAppMac.Serviices;
-using Xamarin.Forms;
-
-namespace TataAppMac.ViewModels
+﻿namespace TataAppMac.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Windows.Input;
+    using GalaSoft.MvvmLight.Command;
+    using Plugin.Connectivity;
+    using TataAppMac.Models;
+    using TataAppMac.Serviices;
+    using Xamarin.Forms;
+
     public class NewTimeViewModel : Time, INotifyPropertyChanged
     {
 		#region Events
@@ -282,6 +283,23 @@ namespace TataAppMac.ViewModels
             IsEnabled = false;
             IsRunning = true;
 
+			if (!CrossConnectivity.Current.IsConnected)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
+			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+			if (!isReachable)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
             var mainViewModel = MainViewModel.GetInstance();
             var employee = mainViewModel.Employee;
@@ -353,6 +371,16 @@ namespace TataAppMac.ViewModels
         #endregion
 
         #region Commands
+        public ICommand NewProjectCommand
+        {
+			get { return new RelayCommand(NewProject); }
+		}
+
+        private async void NewProject()
+        {
+            await navigationService.Navigate("TestModelPage");
+        }
+
         public ICommand SaveCommand
         {
             get { return new RelayCommand(Save); }
@@ -382,6 +410,23 @@ namespace TataAppMac.ViewModels
 
             IsEnabled = false;
             IsRunning = true;
+
+			if (!CrossConnectivity.Current.IsConnected)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
+
+			var isReachable = await CrossConnectivity.Current.IsRemoteReachable("google.com");
+			if (!isReachable)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Check you internet connection.");
+				return;
+			}
 
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
 			var mainViewModel = MainViewModel.GetInstance();
