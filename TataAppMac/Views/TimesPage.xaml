@@ -40,7 +40,7 @@
                                         FontSize="Large"
                                         FontAttributes="Bold"
                                         TextColor="{StaticResource FontColor}"
-                                        Text="{Binding DateReported, StringFormat='{0:dd/MMMM/yyyy}'}}">
+                                        Text="{Binding DateReported, StringFormat='{0:dddd dd/MMMM/yyyy}'}}">
                                     </Label>
                                     <Label
                                         FontAttributes="Bold"

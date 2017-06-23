@@ -130,7 +130,9 @@ namespace TataAppMac.ViewModels
         private void ReloadTimes()
         {
             MyTimes.Clear();
-            foreach (var time in times)
+            foreach (var time in times
+                     .OrderByDescending(t => t.DateReported)
+                     .ThenBy(t => t.From))
             {
                 MyTimes.Add(new TimeItemViewModel 
                 {
@@ -165,7 +167,9 @@ namespace TataAppMac.ViewModels
 			MyTimes.Clear();
 			foreach (var time in times
                      .Where(t => t.Project.Description.ToLower().Contains(Filter.ToLower()) ||
-                                 t.Activity.Description.ToLower().Contains(Filter.ToLower())))
+								 t.Activity.Description.ToLower().Contains(Filter.ToLower()))
+					 .OrderByDescending(t => t.DateReported)
+					 .ThenBy(t => t.From))
 			{
 				MyTimes.Add(new TimeItemViewModel
 				{

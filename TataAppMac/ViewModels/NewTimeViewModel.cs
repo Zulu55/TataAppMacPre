@@ -380,6 +380,9 @@ namespace TataAppMac.ViewModels
 				return;
 			}
 
+            IsEnabled = false;
+            IsRunning = true;
+
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
 			var mainViewModel = MainViewModel.GetInstance();
 			var employee = mainViewModel.Employee;
@@ -412,7 +415,10 @@ namespace TataAppMac.ViewModels
 				employee.AccessToken,
                 newTimeRequest);
 
-            if (!response.IsSuccess)
+			IsEnabled = true;
+            IsRunning = false;
+
+			if (!response.IsSuccess)
             {
                 await dialogService.ShowMessage("Error", response.Message);
                 return;
