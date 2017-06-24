@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TataAppMac.Models;
@@ -32,6 +33,8 @@
         bool isRepeatFriday;
         bool isRepeatSaturday;
         bool isRepeatSunday;
+		public List<Project> projects;
+		public List<Activity> activities;
 		#endregion
 
 		#region Properties
@@ -261,6 +264,8 @@
 		#region Constructor
 		public NewTimeViewModel()
         {
+            instance = this;
+
 			apiService = new ApiService();
 			dialogService = new DialogService();
 			navigationService = new NavigationService();
@@ -275,6 +280,20 @@
             Activities = new ObservableCollection<ActivityItemViewModel>();
 
             LoadPickers();
+		}
+		#endregion
+
+        #region Singleton
+		private static NewTimeViewModel instance;
+
+		public static NewTimeViewModel GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new NewTimeViewModel();
+			}
+
+			return instance;
 		}
 		#endregion
 
@@ -297,38 +316,40 @@
             var mainViewModel = MainViewModel.GetInstance();
             var employee = mainViewModel.Employee;
 
-			var projects = await apiService.GetList<Project>(
+			var projectsResponse = await apiService.GetList<Project>(
 				urlAPI,
 				"/api",
 				"/Projects",
 				employee.TokenType,
 				employee.AccessToken);
 
-            if (projects.IsSuccess)
+            if (projectsResponse.IsSuccess)
             {
-                ReloadProjects((List<Project>)projects.Result);
+                projects = (List<Project>)projectsResponse.Result;
+                ReloadProjects();
             }
 
-			var activities = await apiService.GetList<Activity>(
+			var activitiesResponse = await apiService.GetList<Activity>(
             	urlAPI,
             	"/api",
             	"/Activities",
             	employee.TokenType,
             	employee.AccessToken);
 
-			if (activities.IsSuccess)
+			if (activitiesResponse.IsSuccess)
 			{
-                ReloadActivities((List<Activity>)activities.Result);
+                activities = (List<Activity>)activitiesResponse.Result;
+				ReloadActivities();
 			}
 
 			IsEnabled = true;
             IsRunning = false;
 		}
 
-		private void ReloadProjects(List<Project> projects)
+		public void ReloadProjects()
 		{
             Projects.Clear();
-            foreach (var project in projects)
+            foreach (var project in projects.OrderBy(p => p.Description))
             {
                 Projects.Add(new ProjectItemViewModel 
                 {
@@ -338,10 +359,10 @@
             }
         }
 
-		private void ReloadActivities(List<Activity> activities)
+		public void ReloadActivities()
 		{
 			Activities.Clear();
-			foreach (var activity in activities)
+			foreach (var activity in activities.OrderBy(a => a.Description))
 			{
 				Activities.Add(new ActivityItemViewModel
 				{

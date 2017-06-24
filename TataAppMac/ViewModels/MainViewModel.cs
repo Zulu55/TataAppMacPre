@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using TataAppMac.Models;
-using TataAppMac.Serviices;
-
-namespace TataAppMac.ViewModels
+﻿namespace TataAppMac.ViewModels
 {
-    public class MainViewModel
+	using System.Collections.ObjectModel;
+	using System.Windows.Input;
+	using GalaSoft.MvvmLight.Command;
+	using TataAppMac.Models;
+	using TataAppMac.Serviices;
+
+	public class MainViewModel
     {
         #region Attributes
         private NavigationService navigationService;

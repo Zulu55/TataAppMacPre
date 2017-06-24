@@ -7,7 +7,6 @@
 	using System.Threading.Tasks;
 	using System.Windows.Input;
 	using GalaSoft.MvvmLight.Command;
-	using Plugin.Connectivity;
 	using TataAppMac.Models;
 	using TataAppMac.Serviices;
 	using Xamarin.Forms;

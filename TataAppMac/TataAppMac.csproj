@@ -53,9 +53,6 @@
     <EmbeddedResource Include="Views\NewTimeRepeatsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\TestModelPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -110,9 +107,6 @@
     <Compile Include="ViewModels\ProjectItemViewModel.cs" />
     <Compile Include="ViewModels\ActivityItemViewModel.cs" />
     <Compile Include="Models\NewTimeRequest.cs" />
-    <Compile Include="Views\TestModelPage.xaml.cs">
-      <DependentUpon>TestModelPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Serviices\GeolocatorService.cs" />
   </ItemGroup>
   <ItemGroup>
