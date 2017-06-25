@@ -1,40 +1,40 @@
 ﻿namespace TataAppMac.Views
 {
-    using System;
-    using TataAppMac.Models;
-    using TataAppMac.Serviices;
-    using TataAppMac.ViewModels;
-    using Xamarin.Forms;
+	using System;
+	using TataAppMac.Models;
+	using TataAppMac.Serviices;
+	using TataAppMac.ViewModels;
+	using Xamarin.Forms;
 
 	public partial class NewTimeTimePage : ContentPage
-    {
-        #region Attributes
-        ApiService apiService;
-        DialogService dialogService;
-        #endregion
+	{
+		#region Attributes
+		ApiService apiService;
+		DialogService dialogService;
+		#endregion
 
-        #region Constructors
-        public NewTimeTimePage()
-        {
-            InitializeComponent();
+		#region Constructors
+		public NewTimeTimePage()
+		{
+			InitializeComponent();
 
-            apiService = new ApiService();
-            dialogService = new DialogService();
-        }
-        #endregion
+			apiService = new ApiService();
+			dialogService = new DialogService();
+		}
+		#endregion
 
-        #region Methods
-        void NewProjectClicked(object sender, EventArgs args)
-        {
-            ProjectDescription.Text = string.Empty;
-            ProjectModal.IsVisible = true;
-            ProjectDescription.Focus();
-        }
+		#region Methods
+		void NewProjectClicked(object sender, EventArgs args)
+		{
+			ProjectDescription.Text = string.Empty;
+			ProjectModal.IsVisible = true;
+			ProjectDescription.Focus();
+		}
 
-        async void SaveProjectClicked(object sender, EventArgs args)
-        {
-            if (string.IsNullOrEmpty(ProjectDescription.Text))
-            {
+		async void SaveProjectClicked(object sender, EventArgs args)
+		{
+			if (string.IsNullOrEmpty(ProjectDescription.Text))
+			{
 				await dialogService.ShowMessage("Error", "You must enter a project description.");
 				ProjectDescription.Focus();
 				return;
@@ -48,8 +48,8 @@
 			}
 
 			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
-            var mainViewModel = MainViewModel.GetInstance();
-            var employee = mainViewModel.Employee;
+			var mainViewModel = MainViewModel.GetInstance();
+			var employee = mainViewModel.Employee;
 			var project = new Project { Description = ProjectDescription.Text, };
 
 			var response = await apiService.Post(
@@ -66,27 +66,27 @@
 				return;
 			}
 
-            var newTimeViewModel = NewTimeViewModel.GetInstance();
-            newTimeViewModel.projects.Add((Project)response.Result);
-            newTimeViewModel.ReloadProjects();
+			var newTimeViewModel = NewTimeViewModel.GetInstance();
+			newTimeViewModel.projects.Add((Project)response.Result);
+			newTimeViewModel.ReloadProjects();
 
 			ProjectModal.IsVisible = false;
-        }
+		}
 
-        void CancelProjectClicked(object sender, EventArgs args)
-        {
-            ProjectModal.IsVisible = false;
-        }
+		void CancelProjectClicked(object sender, EventArgs args)
+		{
+			ProjectModal.IsVisible = false;
+		}
 
-        void NewActivityClicked(object sender, EventArgs args)
-        {
-            ActivityDescription.Text = string.Empty;
-            ActivityModal.IsVisible = true;
-            ActivityDescription.Focus();
-        }
+		void NewActivityClicked(object sender, EventArgs args)
+		{
+			ActivityDescription.Text = string.Empty;
+			ActivityModal.IsVisible = true;
+			ActivityDescription.Focus();
+		}
 
-        async void SaveActivityClicked(object sender, EventArgs args)
-        {
+		async void SaveActivityClicked(object sender, EventArgs args)
+		{
 			if (string.IsNullOrEmpty(ActivityDescription.Text))
 			{
 				await dialogService.ShowMessage("Error", "You must enter an activity description.");
@@ -127,10 +127,10 @@
 			ActivityModal.IsVisible = false;
 		}
 
-        void CancelActivityClicked(object sender, EventArgs args)
-        {
-            ActivityModal.IsVisible = false;
-        }
-        #endregion
+		void CancelActivityClicked(object sender, EventArgs args)
+		{
+			ActivityModal.IsVisible = false;
+		}
+		#endregion
 	}
 }

@@ -8,7 +8,7 @@
     Title="New Time"
     BackgroundColor="{StaticResource BackgroundColor}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}">
-	<ContentPage.Content>
+    <ContentPage.Content>
         <AbsoluteLayout>
             <!-- Normal Page Content -->
             <ScrollView 
@@ -306,5 +306,5 @@
                 </StackLayout>
             </ContentView>
         </AbsoluteLayout>
-	</ContentPage.Content>
-</ContentPage>
+    </ContentPage.Content>
+</ContentPage> 

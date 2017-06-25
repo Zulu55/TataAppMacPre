@@ -38,6 +38,12 @@
             get;
             set;
         }
+
+        public LocationsViewModel Locations
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -86,9 +92,9 @@
 
             Menu.Add(new MenuItemViewModel
             {
-                Title = "Localizate Employees",
+                Title = "Locations",
                 Icon = "ic_location_on.png",
-                PageName = "LocalizatePage",
+                PageName = "LocationsPage",
             });
 
             Menu.Add(new MenuItemViewModel

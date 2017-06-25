@@ -1,15 +1,15 @@
-﻿using System.Windows.Input;
-using GalaSoft.MvvmLight.Command;
-using TataAppMac.Models;
-using TataAppMac.Serviices;
-
-namespace TataAppMac.ViewModels
+﻿namespace TataAppMac.ViewModels
 {
-    public class MenuItemViewModel
+    using System.Windows.Input;
+	using GalaSoft.MvvmLight.Command;
+	using TataAppMac.Models;
+	using TataAppMac.Serviices;
+
+	public class MenuItemViewModel
     {
 		#region Attributes
-		private NavigationService navigationService;
-		private DataService dataService;
+		NavigationService navigationService;
+		DataService dataService;
 		#endregion
 
 		#region Properties
@@ -34,7 +34,7 @@ namespace TataAppMac.ViewModels
             get { return new RelayCommand(Navigate); }
         }
 
-        private async void Navigate()
+        async void Navigate()
         {
             if (PageName == "LoginPage")
             {
@@ -49,13 +49,15 @@ namespace TataAppMac.ViewModels
 
                 switch (PageName)
                 {
-                    case "TimesPage":
-                        mainViewModel.Times = new TimesViewModel();
-                        await navigationService.Navigate("TimesPage");
-                        break;
-                    default:
-                        break;
-                }
+					case "TimesPage":
+						mainViewModel.Times = new TimesViewModel();
+						await navigationService.Navigate("TimesPage");
+						break;
+					case "LocationsPage":
+						mainViewModel.Locations = new LocationsViewModel();
+						await navigationService.Navigate("LocationsPage");
+						break;
+				}
             }
         }
         #endregion
