@@ -14,7 +14,8 @@ namespace TataAppMac.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             ImageCircle.Forms.Plugin.iOS.ImageCircleRenderer.Init();
-            LoadApplication(new App());
+			Xamarin.FormsMaps.Init();
+			LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }

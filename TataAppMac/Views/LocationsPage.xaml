@@ -3,16 +3,20 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="TataAppMac.Views.LocationsPage"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
     Title="Locations"
     BackgroundColor="{StaticResource BackgroundColor}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}">
 	<ContentPage.Content>
         <StackLayout
             BindingContext="{Binding Locations}">
-            <Label
-                FontSize="Large"
-                Text="Locations Page">
-            </Label>
+            <maps:Map 
+                WidthRequest="320" 
+                HeightRequest="200"
+                x:Name="MyMap"
+                IsShowingUser="true"
+                MapType="Hybrid">
+            </maps:Map>
         </StackLayout>
 	</ContentPage.Content>
 </ContentPage>
