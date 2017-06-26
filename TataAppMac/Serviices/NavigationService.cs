@@ -38,6 +38,9 @@ namespace TataAppMac.Serviices
 				case "MyProfilePage":
 					await App.Navigator.PushAsync(new MyProfilePage());
 					break;
+				case "ChangePasswordPage":
+					await App.Navigator.PushAsync(new ChangePasswordPage());
+					break;
 			}
 		}
 

@@ -178,7 +178,19 @@
 		#endregion
 
 		#region Commands
-		public ICommand SaveCommand
+        public ICommand ChangePasswordCommand
+        {
+			get { return new RelayCommand(ChangePassword); }
+		}
+
+        async void ChangePassword()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.ChangePassword = new ChangePasswordViewModel();
+            await navigationService.Navigate("ChangePasswordPage");        
+        }
+
+        public ICommand SaveCommand
 		{
 			get { return new RelayCommand(Save); }
 		}

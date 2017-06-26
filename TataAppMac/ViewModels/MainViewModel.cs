@@ -61,15 +61,21 @@
             set;
         }
 
-        public MyProfileViewModel MyProfile
-        {
-            get;
-            set;
-        }
-        #endregion
+		public MyProfileViewModel MyProfile
+		{
+			get;
+			set;
+		}
 
-        #region Constructors
-        public MainViewModel()
+		public ChangePasswordViewModel ChangePassword
+		{
+			get;
+			set;
+		}
+		#endregion
+
+		#region Constructors
+		public MainViewModel()
         {
             instance = this;
 
