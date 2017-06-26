@@ -44,6 +44,12 @@
             get;
             set;
         }
+
+        public MyProfileViewModel MyProfile
+        {
+            get;
+            set;
+        }
         #endregion
 
         #region Constructors
@@ -90,14 +96,21 @@
                 PageName = "SickleavesPage",
             });
 
-            Menu.Add(new MenuItemViewModel
-            {
-                Title = "Locations",
-                Icon = "ic_location_on.png",
-                PageName = "LocationsPage",
-            });
+			Menu.Add(new MenuItemViewModel
+			{
+				Title = "Locations",
+				Icon = "ic_location_on.png",
+				PageName = "LocationsPage",
+			});
 
-            Menu.Add(new MenuItemViewModel
+			Menu.Add(new MenuItemViewModel
+			{
+				Title = "My Profile",
+				Icon = "ic_phonelink_setup.png",
+				PageName = "MyProfilePage",
+			});
+
+			Menu.Add(new MenuItemViewModel
             {
                 Title = "Close Sesion",
                 Icon = "ic_exit_to_app.png",

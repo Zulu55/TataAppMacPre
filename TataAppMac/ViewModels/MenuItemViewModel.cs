@@ -41,7 +41,7 @@
                 var employee = dataService.First<Employee>(false);
                 employee.IsRemembered = false;
                 dataService.Update(employee);
-                navigationService.SetMainPage("LoginPage");
+                navigationService.SetMainPage(PageName);
             }
             else
             {
@@ -51,14 +51,17 @@
                 {
 					case "TimesPage":
 						mainViewModel.Times = new TimesViewModel();
-						await navigationService.Navigate("TimesPage");
 						break;
 					case "LocationsPage":
 						mainViewModel.Locations = new LocationsViewModel();
-						await navigationService.Navigate("LocationsPage");
+						break;
+					case "MyProfilePage":
+						mainViewModel.MyProfile = new MyProfileViewModel();
 						break;
 				}
-            }
+
+				await navigationService.Navigate(PageName);
+			}
         }
         #endregion
     }

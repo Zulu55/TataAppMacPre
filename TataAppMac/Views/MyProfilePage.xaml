@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:control="clr-namespace:TataAppMac.Controls" 
+    x:Class="TataAppMac.Views.MyProfilePage"
+    Title="My Profile"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BindingContext="{Binding Main, Source={StaticResource Locator}}">
+	<ContentPage.Content>
+        <ScrollView
+            BindingContext="{Binding MyProfile}">
+            <StackLayout
+                Padding="8">
+                <Grid>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="First name"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="{StaticResource FontColor}">
+                        </Label>
+                        <Entry
+                            Text="{Binding FirstName, Mode=TwoWay}"
+                            BackgroundColor="White"
+                            Grid.Column="1"
+                            TextColor="{StaticResource FontColor}">
+                        </Entry>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="Last name"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="{StaticResource FontColor}">
+                        </Label>
+                        <Entry
+                            Text="{Binding LastName, Mode=TwoWay}"
+                            BackgroundColor="White"
+                            Grid.Column="1"
+                            TextColor="{StaticResource FontColor}">
+                        </Entry>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="Employee code"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="{StaticResource FontColor}">
+                        </Label>
+                        <Entry
+                            Text="{Binding EmployeeCode, Mode=TwoWay}"
+                            BackgroundColor="White"
+                            Grid.Column="1"
+                            TextColor="{StaticResource FontColor}">
+                        </Entry>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Column="0"
+                            Text="Document type"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Center"
+                            TextColor="{StaticResource FontColor}">
+                        </Label>
+                        <StackLayout
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <control:BindablePicker 
+                                HeightRequest="45"
+                                Title="Select a document type..." 
+                                DisplayMemberPath="Description" 
+                                SelectedValuePath="DocumentTypeId" 
+                                TextColor="{StaticResource FontColor}"
+                                BackgroundColor="White"
+                                ItemsSource="{Binding DocumentTypes}" 
+                                SelectedValue="{Binding Path=DocumentTypeId, Mode=TwoWay}" 
+                                HorizontalOptions="FillAndExpand" 
+                                VerticalOptions="Center">
+                            </control:BindablePicker>
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+	</ContentPage.Content>
+</ContentPage>

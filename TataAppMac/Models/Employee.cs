@@ -1,10 +1,10 @@
-﻿using System;
-using SQLite.Net.Attributes;
-using Xamarin.Forms;
-
-namespace TataAppMac.Models
+﻿namespace TataAppMac.Models
 {
-    public class Employee
+    using System;
+	using SQLite.Net.Attributes;
+	using Xamarin.Forms;
+
+	public class Employee
     {
         [PrimaryKey]
 		public int EmployeeId { get; set; }

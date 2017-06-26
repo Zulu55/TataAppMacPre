@@ -35,6 +35,9 @@ namespace TataAppMac.Serviices
 				case "LocationsPage":
 					await App.Navigator.PushAsync(new LocationsPage());
 					break;
+				case "MyProfilePage":
+					await App.Navigator.PushAsync(new MyProfilePage());
+					break;
 			}
 		}
 
