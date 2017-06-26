@@ -123,6 +123,8 @@
       <DependentUpon>MyProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
+    <Compile Include="Models\DocumentType.cs" />
+    <Compile Include="ViewModels\DocumentTypeItemViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
@@ -175,6 +177,12 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Maps">
       <HintPath>..\packages\Xamarin.Forms.Maps.2.3.4.247\lib\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10\Xamarin.Forms.Maps.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media.Abstractions">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Plugin.Media">
+      <HintPath>..\packages\Xam.Plugin.Media.2.6.2\lib\portable-net45+wp80+win8+wpa81\Plugin.Media.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
