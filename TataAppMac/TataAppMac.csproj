@@ -125,6 +125,8 @@
     <Compile Include="ViewModels\MyProfileViewModel.cs" />
     <Compile Include="Models\DocumentType.cs" />
     <Compile Include="ViewModels\DocumentTypeItemViewModel.cs" />
+    <Compile Include="Helpers\RegexUtilities.cs" />
+    <Compile Include="Helpers\FilesHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
@@ -197,6 +199,7 @@
     <Folder Include="Interfaces\" />
     <Folder Include="Data\" />
     <Folder Include="Controls\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

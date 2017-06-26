@@ -3,13 +3,14 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using TataAppMac.Models;
-    using TataAppMac.Serviices;
-	using Plugin.Media;
-	using Plugin.Media.Abstractions;
-    using Xamarin.Forms;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
+    using Plugin.Media;
+    using Plugin.Media.Abstractions;
+    using TataAppMac.Helpers;
+    using TataAppMac.Models;
+    using TataAppMac.Serviices;
+    using Xamarin.Forms;
 
     public class MyProfileViewModel : Employee, INotifyPropertyChanged
     {
@@ -20,8 +21,9 @@
         #region Attributes
         ApiService apiService;
         DialogService dialogService;
-        NavigationService navigationService;
-        bool isRunning;
+		NavigationService navigationService;
+		DataService dataService;
+		bool isRunning;
         bool isEnabled;
 		ImageSource imageSource;
 		MediaFile file;
@@ -89,6 +91,7 @@
             apiService = new ApiService();
             dialogService = new DialogService();
             navigationService = new NavigationService();
+            dataService = new DataService();
 
             DocumentTypes = new ObservableCollection<DocumentTypeItemViewModel>();
 
@@ -166,11 +169,122 @@
 			Email = mainViewModel.Employee.Email;
 			Phone = mainViewModel.Employee.Phone;
 			Address = mainViewModel.Employee.Address;
+			EmployeeId = mainViewModel.Employee.EmployeeId;
+			TokenType = mainViewModel.Employee.TokenType;
+			AccessToken = mainViewModel.Employee.AccessToken;
+			Password = mainViewModel.Employee.Password;
+			LoginTypeId = mainViewModel.Employee.LoginTypeId;
 		}
 		#endregion
 
 		#region Commands
-		public ICommand PickPictureCommand
+		public ICommand SaveCommand
+		{
+			get { return new RelayCommand(Save); }
+		}
+
+        async void Save()
+        {
+			if (string.IsNullOrEmpty(FirstName))
+			{
+				await dialogService.ShowMessage("Error", "You must enter a first name.");
+				return;
+			}
+
+			if (string.IsNullOrEmpty(LastName))
+			{
+				await dialogService.ShowMessage("Error", "You must enter a last name.");
+				return;
+			}
+
+			if (EmployeeCode == 0)
+			{
+				await dialogService.ShowMessage("Error", "You must enter an employee code.");
+				return;
+			}
+
+			if (string.IsNullOrEmpty(Document))
+			{
+				await dialogService.ShowMessage("Error", "You must enter a document.");
+				return;
+			}
+
+			if (string.IsNullOrEmpty(Email))
+			{
+				await dialogService.ShowMessage("Error", "You must enter an email.");
+				return;
+			}
+
+			if (!RegexUtilities.CheckEmail(Email))
+			{
+				await dialogService.ShowMessage("Error", "You must enter a valid email.");
+				return;
+			}
+
+			if (string.IsNullOrEmpty(Phone))
+			{
+				await dialogService.ShowMessage("Error", "You must enter a phone.");
+				return;
+			}
+
+			if (string.IsNullOrEmpty(Address))
+			{
+				await dialogService.ShowMessage("Error", "You must enter an address.");
+				return;
+			}
+
+			IsRunning = true;
+			IsEnabled = false;
+
+            byte[] imageArray = null;
+			if (file != null)
+			{
+				imageArray = FilesHelper.ReadFully(file.GetStream());
+				file.Dispose();
+			}
+
+            var employee = new Employee
+            {
+                Address = Address,
+                Document = Document,
+                DocumentTypeId = DocumentTypeId,
+                Email = Email,
+                EmployeeCode = EmployeeCode,
+                EmployeeId = EmployeeId,
+                FirstName = FirstName,
+                ImageArray = imageArray,
+                LastName = LastName,
+                LoginTypeId = LoginTypeId,
+                Password = Password,
+                Phone = Phone,
+            };
+
+			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+            var response = await apiService.Put(
+				urlAPI,
+				"/api",
+				"/Employees", 
+                TokenType, 
+                AccessToken, 
+				employee);
+            
+			IsRunning = false;
+			IsEnabled = true;
+
+			if (!response.IsSuccess)
+			{
+				await dialogService.ShowMessage("Error", response.Message);
+				return;
+			}
+
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.Employee = this;
+            dataService.DeleteAllAndInsert(this);
+
+			await navigationService.Back();
+		}
+
+        public ICommand PickPictureCommand
 		{
 			get { return new RelayCommand(PickPicture); }
 		}

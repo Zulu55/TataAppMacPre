@@ -1,15 +1,21 @@
 ﻿namespace TataAppMac.ViewModels
 {
 	using System.Collections.ObjectModel;
-	using System.Windows.Input;
+    using System.ComponentModel;
+    using System.Windows.Input;
 	using GalaSoft.MvvmLight.Command;
 	using TataAppMac.Models;
 	using TataAppMac.Serviices;
 
-	public class MainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
-        #region Attributes
-        private NavigationService navigationService;
+		#region Events
+		public event PropertyChangedEventHandler PropertyChanged;
+		#endregion
+
+		#region Attributes
+		NavigationService navigationService;
+        Employee employee;
         #endregion
 
         #region Properties
@@ -17,9 +23,19 @@
 
         public Employee Employee
         {
-            get;
-            set;
-        }
+			set
+			{
+				if (employee != value)
+				{
+					employee = value;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Employee"));
+				}
+			}
+			get
+			{
+				return employee;
+			}
+		}
 
         public LoginViewModel Login
         {
