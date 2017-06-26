@@ -12,12 +12,55 @@
 
 	public class ApiService
 	{
-		public async Task<Response> ChangePassword(string urlBase, 
-                                                   string servicePrefix, 
-                                                   string controller,
-			                                       string tokenType, 
-                                                   string accessToken, 
-                                                   ChangePasswordRequest changePasswordRequest)
+		public async Task<Response> PasswordRecovery(
+            string urlBase, 
+            string servicePrefix,
+			string controller, 
+            string email)
+		{
+			try
+			{
+                var userRequest = new EmployeeRequest2 { Email = email, };
+				var request = JsonConvert.SerializeObject(userRequest);
+				var content = new StringContent(request, Encoding.UTF8, "application/json");
+				var client = new HttpClient();
+				client.BaseAddress = new Uri(urlBase);
+				var url = string.Format("{0}{1}", servicePrefix, controller);
+				var response = await client.PostAsync(url, content);
+
+				if (!response.IsSuccessStatusCode)
+				{
+					return new Response
+					{
+						IsSuccess = false,
+						Message = response.StatusCode.ToString(),
+					};
+				}
+
+				return new Response
+				{
+					IsSuccess = true,
+					Message = "OK",
+				};
+			}
+			catch (Exception ex)
+			{
+				return new Response
+				{
+					IsSuccess = false,
+					Message = ex.Message,
+				};
+			}
+		}
+
+
+		public async Task<Response> ChangePassword(
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            ChangePasswordRequest changePasswordRequest)
 		{
 			try
 			{
@@ -82,9 +125,10 @@
 			};
 		}
 
-        public async Task<TokenResponse> GetToken(string urlBase, 
-                                                  string username, 
-                                                  string password)
+        public async Task<TokenResponse> GetToken(
+            string urlBase, 
+            string username, 
+            string password)
 		{
 			try
 			{
@@ -155,8 +199,12 @@
 		}
 
 		public async Task<Response> Get<T>(
-            string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken, int id)
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            int id)
 		{
 			try
 			{
@@ -195,7 +243,9 @@
 		}
 
 		public async Task<Response> GetList<T>(
-			string urlBase, string servicePrefix, string controller)
+			string urlBase, 
+            string servicePrefix, 
+            string controller)
 		{
 			try
 			{
@@ -233,8 +283,11 @@
 		}
 
 		public async Task<Response> GetList<T>(
-            string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken)
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken)
 		{
 			try
 			{
@@ -273,8 +326,12 @@
 		}
 
 		public async Task<Response> GetList<T>(
-			string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken, int id)
+			string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            int id)
 		{
 			try
 			{
@@ -313,8 +370,12 @@
 		}
 
 		public async Task<Response> Post<T>(
-            string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken, T model)
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            T model)
 		{
 			try
 			{
@@ -356,7 +417,10 @@
 		}
 
 		public async Task<Response> Post<T>(
-            string urlBase, string servicePrefix, string controller, T model)
+            string urlBase, 
+            string servicePrefix, 
+            string controller, 
+            T model)
 		{
 			try
 			{
@@ -397,8 +461,12 @@
 		}
 
 		public async Task<Response> Put<T>(
-            string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken, T model)
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            T model)
 		{
 			try
 			{
@@ -440,8 +508,12 @@
 		}
 
 		public async Task<Response> Delete<T>(
-            string urlBase, string servicePrefix, string controller,
-			string tokenType, string accessToken, T model)
+            string urlBase, 
+            string servicePrefix, 
+            string controller,
+			string tokenType, 
+            string accessToken, 
+            T model)
 		{
 			try
 			{

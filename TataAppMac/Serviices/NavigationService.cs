@@ -18,6 +18,9 @@
 				case "NewEmployeePage":
 					App.Current.MainPage = new NewEmployeePage();
 					break;
+				case "ForgotPasswordPage":
+					App.Current.MainPage = new ForgotPasswordPage();
+					break;
 				default:
 					break;
 			}

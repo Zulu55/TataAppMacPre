@@ -78,6 +78,12 @@
             get;
             set;
         }
+
+        public ForgotPasswordViewModel ForgotPassword
+        {
+            get;
+            set;
+        }
 		#endregion
 
 		#region Constructors

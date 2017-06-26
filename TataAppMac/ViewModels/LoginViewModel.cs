@@ -126,6 +126,18 @@ namespace TataAppMac.ViewModels
         #endregion
 
         #region Commands
+        public ICommand ForgotPasswordCommand
+        {
+			get { return new RelayCommand(ForgotPassword); }
+		}
+
+        void ForgotPassword()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.ForgotPassword = new ForgotPasswordViewModel();
+            navigationService.SetMainPage("ForgotPasswordPage");
+        }
+
         public ICommand RegisterCommand
         {
 			get { return new RelayCommand(Register); }
