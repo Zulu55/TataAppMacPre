@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using TataAppMac.Views;
-
-namespace TataAppMac.Serviices
+﻿namespace TataAppMac.Serviices
 {
-    public class NavigationService
+    using System.Threading.Tasks;
+	using TataAppMac.Views;
+
+	public class NavigationService
     {
 		public void SetMainPage(string pageName)
 		{
@@ -14,6 +14,9 @@ namespace TataAppMac.Serviices
 					break;
 				case "LoginPage":
 					App.Current.MainPage = new LoginPage();
+					break;
+				case "NewEmployeePage":
+					App.Current.MainPage = new NewEmployeePage();
 					break;
 				default:
 					break;

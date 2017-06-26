@@ -72,6 +72,12 @@
 			get;
 			set;
 		}
+
+        public NewEmployeeViewModel NewEmployee
+        {
+            get;
+            set;
+        }
 		#endregion
 
 		#region Constructors

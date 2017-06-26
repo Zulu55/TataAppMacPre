@@ -62,6 +62,9 @@
     <EmbeddedResource Include="Views\ChangePasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\NewEmployeePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -135,6 +138,10 @@
     </Compile>
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ChangePasswordRequest.cs" />
+    <Compile Include="Views\NewEmployeePage.xaml.cs">
+      <DependentUpon>NewEmployeePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\NewEmployeeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

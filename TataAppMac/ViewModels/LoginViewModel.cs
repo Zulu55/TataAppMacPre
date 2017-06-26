@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using Plugin.Connectivity;
@@ -125,6 +126,18 @@ namespace TataAppMac.ViewModels
         #endregion
 
         #region Commands
+        public ICommand RegisterCommand
+        {
+			get { return new RelayCommand(Register); }
+		}
+
+        void Register()
+        {
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.NewEmployee = new NewEmployeeViewModel();
+            navigationService.SetMainPage("NewEmployeePage");
+        }
+
         public ICommand LoginCommand
         {
             get { return new RelayCommand(Login);  }
