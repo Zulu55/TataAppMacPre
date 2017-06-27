@@ -21,6 +21,9 @@
 				case "ForgotPasswordPage":
 					App.Current.MainPage = new ForgotPasswordPage();
 					break;
+				case "LoginFacebookPage":
+					App.Current.MainPage = new LoginFacebookPage();
+					break;
 				default:
 					break;
 			}

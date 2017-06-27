@@ -68,6 +68,9 @@
     <EmbeddedResource Include="Views\ForgotPasswordPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginFacebookPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -150,6 +153,10 @@
     </Compile>
     <Compile Include="ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\EmployeeRequest2.cs" />
+    <Compile Include="Views\LoginFacebookPage.xaml.cs">
+      <DependentUpon>LoginFacebookPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FacebookResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

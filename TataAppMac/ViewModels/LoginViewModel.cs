@@ -123,9 +123,19 @@ namespace TataAppMac.ViewModels
             Email = "jzuluaga55@gmail.com";
             Password = "123456";
         }
-        #endregion
+		#endregion
 
-        #region Commands
+		#region Commands
+		public ICommand LoginFacebookCommand 
+        { 
+            get { return new RelayCommand(LoginFacebook); } 
+        }
+
+		void LoginFacebook()
+		{
+			navigationService.SetMainPage("LoginFacebookPage");
+		}
+
         public ICommand ForgotPasswordCommand
         {
 			get { return new RelayCommand(ForgotPassword); }

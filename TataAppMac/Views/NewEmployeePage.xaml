@@ -53,6 +53,7 @@
                         </Label>
                         <Entry
                             Text="{Binding FirstName, Mode=TwoWay}"
+                            Placeholder="First name..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -72,6 +73,7 @@
                         </Label>
                         <Entry
                             Text="{Binding LastName, Mode=TwoWay}"
+                            Placeholder="Last name..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -91,6 +93,7 @@
                         </Label>
                         <Entry
                             Text="{Binding EmployeeCode, Mode=TwoWay}"
+                            Placeholder="Employee code..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -139,6 +142,7 @@
                         </Label>
                         <Entry
                             Text="{Binding Document, Mode=TwoWay}"
+                            Placeholder="Document..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -188,6 +192,7 @@
                         <Entry
                             Text="{Binding Email, Mode=TwoWay}"
                             Keyboard="Email"
+                            Placeholder="Email..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -207,6 +212,7 @@
                         </Label>
                         <Entry
                             Text="{Binding Phone, Mode=TwoWay}"
+                            Placeholder="Phone..."
                             Keyboard="Telephone"
                             BackgroundColor="White"
                             Grid.Column="1"
@@ -227,6 +233,7 @@
                         </Label>
                         <Entry
                             Text="{Binding Address, Mode=TwoWay}"
+                            Placeholder="Address..."
                             BackgroundColor="White"
                             Grid.Column="1"
                             TextColor="{StaticResource FontColor}">
@@ -249,7 +256,7 @@
                             Grid.Column="1"
                             Text="{Binding Password, Mode=TwoWay}"
                             TextColor="{StaticResource FontColor}"
-                            Placeholder="Enter new password..."
+                            Placeholder="Password..."
                             IsPassword="True"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="Center"
@@ -271,7 +278,7 @@
                         <Entry
                             Grid.Column="1"
                             Text="{Binding PasswordConfirm, Mode=TwoWay}"
-                            Placeholder="Enter the password confirm..."
+                            Placeholder="Password confirm..."
                             IsPassword="True"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="Center"

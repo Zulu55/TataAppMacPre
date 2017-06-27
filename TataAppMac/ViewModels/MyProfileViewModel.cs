@@ -186,6 +186,12 @@
         async void ChangePassword()
         {
             var mainViewModel = MainViewModel.GetInstance();
+
+            if (mainViewModel.Employee.LoginTypeId != 1)
+            {
+                return;
+            }
+
             mainViewModel.ChangePassword = new ChangePasswordViewModel();
             await navigationService.Navigate("ChangePasswordPage");        
         }
