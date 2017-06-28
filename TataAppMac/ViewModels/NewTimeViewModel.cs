@@ -284,7 +284,7 @@
 		#endregion
 
         #region Singleton
-		private static NewTimeViewModel instance;
+		static NewTimeViewModel instance;
 
 		public static NewTimeViewModel GetInstance()
 		{
@@ -298,7 +298,7 @@
 		#endregion
 
 		#region Methods
-		private async void LoadPickers()
+		async void LoadPickers()
         {
             IsEnabled = false;
             IsRunning = true;
@@ -372,7 +372,7 @@
 			}
 		}
 
-		private void TurnOffDays()
+		void TurnOffDays()
 		{
 			IsRepeatMonday = false;
             IsRepeatTuesday = false;
@@ -385,22 +385,12 @@
         #endregion
 
         #region Commands
-        public ICommand NewProjectCommand
-        {
-			get { return new RelayCommand(NewProject); }
-		}
-
-        private async void NewProject()
-        {
-            await navigationService.Navigate("TestModelPage");
-        }
-
         public ICommand SaveCommand
         {
             get { return new RelayCommand(Save); }
         }
 
-        private async void Save()
+        async void Save()
         {
 			if (ProjectId == 0)
 			{
@@ -482,7 +472,7 @@
             await navigationService.Back();
 		}
 
-        private void ConvertHours()
+        void ConvertHours()
         {
 			int posTo = ToString.IndexOf(':');
 			int posFrom = FromString.IndexOf(':');

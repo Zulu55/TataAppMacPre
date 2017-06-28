@@ -21,7 +21,7 @@ namespace TataAppMac.Droid
 			var auth = new OAuth2Authenticator(
 				clientId: "142846209613613",
 				scope: "",
-				authorizeUrl: new Uri("https://www.facebook.com/v2.8/dialog/oauth"),
+				authorizeUrl: new Uri("https://www.facebook.com/v2.9/dialog/oauth"),
 				redirectUrl: new Uri("http://www.facebook.com/connect/login_success.html"));
 
 			auth.Completed += async (sender, eventArgs) =>
@@ -43,11 +43,14 @@ namespace TataAppMac.Droid
 
 		private async Task<FacebookResponse> GetFacebookProfileAsync(string accessToken)
 		{
-			var requestUrl = "https://graph.facebook.com/v2.8/me/?fields=name," +
-                "picture.width(999),cover,age_range,devices,email,gender," +
-                "is_verified,birthday,languages,work,website,religion," +
-                "location,locale,link,first_name,last_name," +
-                "hometown&access_token=" + accessToken;
+			var requestUrl = "https://graph.facebook.com/v2.9/me/?fields=id," +
+                "picture.width(999),name,age_range,birthday,cover,about," +
+                "context,currency,devices,education,email," +
+                "favorite_athletes,favorite_teams,first_name," +
+                "gender,hometown,inspirational_people,interested_in,is_verified," +
+                "languages,last_name,link,locale,location,middle_name," +
+                "name_format,political,meeting_for,quotes,public_key," +
+                "relationship_status,religion&access_token=" + accessToken;
 			var httpClient = new HttpClient();
 			var userJson = await httpClient.GetStringAsync(requestUrl);
 			var facebookResponse = JsonConvert.DeserializeObject<FacebookResponse>(userJson);
