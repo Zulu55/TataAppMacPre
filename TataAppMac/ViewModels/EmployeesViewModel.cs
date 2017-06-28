@@ -23,6 +23,7 @@
 		bool isRefreshing;
 		string filter;
 		List<Employee> employees;
+        Employee me;
 		#endregion
 
 		#region Properties
@@ -81,6 +82,9 @@
 
 			apiService = new ApiService();
 			dialogService = new DialogService();
+
+            var mainViewModel = MainViewModel.GetInstance();
+            me = mainViewModel.Employee;
 
 			MyEmployees = new ObservableCollection<EmployeeItemViewModel>();
 		}
@@ -142,20 +146,23 @@
 					 .OrderBy(e => e.FirstName)
 					 .ThenBy(e => e.LastName))
 			{
-                MyEmployees.Add(new EmployeeItemViewModel
+                if (employee.EmployeeId != me.EmployeeId)
                 {
-                    Address = employee.Address,
-                    Document = employee.Document,
-                    DocumentTypeId = employee.DocumentTypeId,
-                    Email = employee.Email,
-                    EmployeeCode = employee.EmployeeCode,
-                    EmployeeId = employee.EmployeeId,
-                    FirstName = employee.FirstName,
-                    LastName = employee.LastName,
-                    LoginTypeId = employee.LoginTypeId,
-                    Phone = employee.Phone,
-                    Picture = employee.Picture,
-                });
+                    MyEmployees.Add(new EmployeeItemViewModel
+                    {
+                        Address = employee.Address,
+                        Document = employee.Document,
+                        DocumentTypeId = employee.DocumentTypeId,
+                        Email = employee.Email,
+                        EmployeeCode = employee.EmployeeCode,
+                        EmployeeId = employee.EmployeeId,
+                        FirstName = employee.FirstName,
+                        LastName = employee.LastName,
+                        LoginTypeId = employee.LoginTypeId,
+                        Phone = employee.Phone,
+                        Picture = employee.Picture,
+                    });
+                }
 			}
 		}
 		#endregion
@@ -182,20 +189,23 @@
 					 .OrderBy(e => e.FirstName)
 					 .ThenBy(e => e.LastName))
 			{
-				MyEmployees.Add(new EmployeeItemViewModel
+				if (employee.EmployeeId != me.EmployeeId)
 				{
-					Address = employee.Address,
-					Document = employee.Document,
-					DocumentTypeId = employee.DocumentTypeId,
-					Email = employee.Email,
-					EmployeeCode = employee.EmployeeCode,
-					EmployeeId = employee.EmployeeId,
-					FirstName = employee.FirstName,
-					LastName = employee.LastName,
-					LoginTypeId = employee.LoginTypeId,
-					Phone = employee.Phone,
-					Picture = employee.Picture,
-				});
+					MyEmployees.Add(new EmployeeItemViewModel
+					{
+						Address = employee.Address,
+						Document = employee.Document,
+						DocumentTypeId = employee.DocumentTypeId,
+						Email = employee.Email,
+						EmployeeCode = employee.EmployeeCode,
+						EmployeeId = employee.EmployeeId,
+						FirstName = employee.FirstName,
+						LastName = employee.LastName,
+						LoginTypeId = employee.LoginTypeId,
+						Phone = employee.Phone,
+						Picture = employee.Picture,
+					});
+				}
 			}
 		}
 		#endregion

@@ -74,6 +74,9 @@
     <EmbeddedResource Include="Views\EmployeesPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\EmployeeDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -165,6 +168,10 @@
     </Compile>
     <Compile Include="ViewModels\EmployeesViewModel.cs" />
     <Compile Include="ViewModels\EmployeeItemViewModel.cs" />
+    <Compile Include="Views\EmployeeDetailPage.xaml.cs">
+      <DependentUpon>EmployeeDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\EmployeeDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">

@@ -90,6 +90,12 @@
             get;
             set;
         }
+
+        public EmployeeDetailViewModel EmployeeDetail
+        {
+            get;
+            set;
+        }
 		#endregion
 
 		#region Constructors
