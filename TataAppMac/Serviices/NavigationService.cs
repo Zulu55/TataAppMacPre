@@ -50,6 +50,9 @@
 				case "ChangePasswordPage":
 					await App.Navigator.PushAsync(new ChangePasswordPage());
 					break;
+				case "EmployeesPage":
+					await App.Navigator.PushAsync(new EmployeesPage());
+					break;
 			}
 		}
 

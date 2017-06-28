@@ -205,6 +205,7 @@
     <BundleResource Include="Resources\ic_phonelink_setup.png" />
     <BundleResource Include="Resources\ic_add_a_photo.png" />
     <BundleResource Include="Resources\ic_insert_photo.png" />
+    <BundleResource Include="Resources\ic_action_people.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamarin.auth">

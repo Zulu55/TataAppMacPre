@@ -58,6 +58,9 @@
 					case "MyProfilePage":
 						mainViewModel.MyProfile = new MyProfileViewModel();
 						break;
+					case "EmployeesPage":
+						mainViewModel.Employees = new EmployeesViewModel();
+						break;
 				}
 
 				await navigationService.Navigate(PageName);

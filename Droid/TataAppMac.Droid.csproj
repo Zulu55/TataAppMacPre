@@ -195,6 +195,7 @@
     <AndroidResource Include="Resources\drawable\ic_phonelink_setup.png" />
     <AndroidResource Include="Resources\drawable\ic_add_a_photo.png" />
     <AndroidResource Include="Resources\drawable\ic_insert_photo.png" />
+    <AndroidResource Include="Resources\drawable\ic_action_people.png" />
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="xamarin.auth">

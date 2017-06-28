@@ -84,6 +84,12 @@
             get;
             set;
         }
+
+        public EmployeesViewModel Employees
+        {
+            get;
+            set;
+        }
 		#endregion
 
 		#region Constructors
@@ -142,6 +148,13 @@
 				Title = "My Profile",
 				Icon = "ic_phonelink_setup.png",
 				PageName = "MyProfilePage",
+			});
+
+			Menu.Add(new MenuItemViewModel
+			{
+				Title = "Employees",
+				Icon = "ic_action_people.png",
+				PageName = "EmployeesPage",
 			});
 
 			Menu.Add(new MenuItemViewModel

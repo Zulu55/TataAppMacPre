@@ -18,11 +18,11 @@
 		#endregion
 
         #region Attributes
-		private ApiService apiService;
-		private DialogService dialogService;
-		private bool isRefreshing = false;
-        private string filter;
-        private List<Time> times;
+		ApiService apiService;
+		DialogService dialogService;
+	    bool isRefreshing;
+        string filter;
+        List<Time> times;
 		#endregion
 
 		#region Properties
@@ -87,7 +87,7 @@
 		#endregion
 
 		#region Singleton
-		private static TimesViewModel instance;
+		static TimesViewModel instance;
 
 		public static TimesViewModel GetInstance()
 		{
@@ -101,7 +101,7 @@
 		#endregion
 
 		#region Methods
-		private async Task LoadTimes()
+		async Task LoadTimes()
         {
             IsRefreshing = true;
 
@@ -136,7 +136,7 @@
 			IsRefreshing = false;
 		}
 
-        private void ReloadTimes()
+        void ReloadTimes()
         {
             MyTimes.Clear();
             foreach (var time in times
@@ -162,16 +162,22 @@
         #endregion
 
         #region Commands
-        public ICommand RefreshCommand { get { return new RelayCommand(Refresh); } }
+        public ICommand RefreshCommand 
+        { 
+            get { return new RelayCommand(Refresh); } 
+        }
 
 		public async void Refresh()
 		{
             await LoadTimes();
 		}
 
-        public ICommand SearchCommand { get { return new RelayCommand(Search); } }
+        public ICommand SearchCommand 
+        { 
+            get { return new RelayCommand(Search); } 
+        }
 
-        private void Search()
+        void Search()
         {
 			MyTimes.Clear();
 			foreach (var time in times

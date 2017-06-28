@@ -2,13 +2,14 @@
 <ContentPage 
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="TataAppMac.Views.TimesPage"
-    Title="My Times"
+    xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin.Abstractions"
+    x:Class="TataAppMac.Views.EmployeesPage"
+    Title="Employees"
     BackgroundColor="{StaticResource BackgroundColor}"
     BindingContext="{Binding Main, Source={StaticResource Locator}}">
 	<ContentPage.Content>
         <StackLayout
-            BindingContext="{Binding Times}"
+            BindingContext="{Binding Employees}"
             Padding="8">
             <SearchBar
                 HeightRequest="35"
@@ -18,7 +19,7 @@
             </SearchBar>    
             <ListView
                 BackgroundColor="{StaticResource BackgroundColor}"
-                ItemsSource="{Binding MyTimes}" 
+                ItemsSource="{Binding MyEmployees}" 
                 HasUnevenRows="True"
                 IsPullToRefreshEnabled="True"
                 RefreshCommand="{Binding RefreshCommand}"
@@ -28,36 +29,45 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                <controls:CircleImage 
+                                    Grid.Column="0"
+                                    Source="{Binding FullPicture}" 
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Aspect="AspectFill"
+                                    WidthRequest="80"
+                                    HeightRequest="80">
+                                </controls:CircleImage>
                                 <StackLayout
-                                    Grid.Column="0">
+                                    Grid.Column="1">
                                     <Label
                                         FontSize="Large"
                                         FontAttributes="Bold"
                                         TextColor="{StaticResource FontColor}"
-                                        Text="{Binding DateReported, StringFormat='{0:dddd dd/MMMM/yyyy}'}}">
-                                    </Label>
-                                    <Label
-                                        FontAttributes="Bold"
-                                        TextColor="{StaticResource FontColor}"
-                                        Text="{Binding FromTo}">
+                                        Text="{Binding FullName}">
                                     </Label>
                                     <Label
                                         TextColor="{StaticResource FontColor}"
-                                        Text="{Binding Project.Description}">
+                                        Text="{Binding EmployeeCode, StringFormat='Code: {0}'}}">
                                     </Label>
                                     <Label
                                         TextColor="{StaticResource FontColor}"
-                                        Text="{Binding ActivityTime}">
+                                        Text="{Binding Email, StringFormat='Email: {0}'}}">
+                                    </Label>
+                                    <Label
+                                        TextColor="{StaticResource FontColor}"
+                                        Text="{Binding Phone, StringFormat='Phone: {0}'}}">
                                     </Label>
                                 </StackLayout>
                                 <Image 
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Source="ic_chevron_right.png">
                                     <Image.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding SelectTimeCommand}"/>
+                                        <TapGestureRecognizer Command="{Binding SelectEmployeeCommand}"/>
                                     </Image.GestureRecognizers>
                                 </Image>
                             </Grid>
@@ -67,9 +77,4 @@
             </ListView>
         </StackLayout>
 	</ContentPage.Content>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem 
-            Icon="ic_action_add_circle.png"
-            Command="{Binding NewTimeCommand}"/>
-    </ContentPage.ToolbarItems>
 </ContentPage>
