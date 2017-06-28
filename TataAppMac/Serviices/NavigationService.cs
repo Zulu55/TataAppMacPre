@@ -56,6 +56,9 @@
 				case "EmployeeDetailPage":
 					await App.Navigator.PushAsync(new EmployeeDetailPage());
 					break;
+				case "TimeDetailPage":
+					await App.Navigator.PushAsync(new TimeDetailPage());
+					break;
 			}
 		}
 

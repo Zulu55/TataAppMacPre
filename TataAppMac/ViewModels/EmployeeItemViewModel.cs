@@ -1,6 +1,5 @@
 ﻿namespace TataAppMac.ViewModels
 {
-    using System;
     using System.Windows.Input;
     using GalaSoft.MvvmLight.Command;
     using TataAppMac.Models;

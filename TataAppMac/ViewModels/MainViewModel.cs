@@ -96,6 +96,12 @@
             get;
             set;
         }
+
+        public TimeDetailViewModel TimeDetail
+        {
+            get;
+            set;
+        }
 		#endregion
 
 		#region Constructors
