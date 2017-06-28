@@ -20,6 +20,7 @@
 		bool isRunning;
 		bool isEnabled;
 		Employee employee;
+        string message;
 		#endregion
 
 		#region Properties
@@ -57,9 +58,19 @@
 
         public string Message
         {
-            get;
-            set;
-        }
+			set
+			{
+				if (message != value)
+				{
+					message = value;
+					PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Message"));
+				}
+			}
+			get
+			{
+				return message;
+			}
+		}
 		#endregion
 
 		#region Constructor
