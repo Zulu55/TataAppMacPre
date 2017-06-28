@@ -66,9 +66,9 @@
 				return;
 			}
 
-			var newTimeViewModel = NewTimeViewModel.GetInstance();
-			newTimeViewModel.projects.Add((Project)response.Result);
-			newTimeViewModel.ReloadProjects();
+			var timeDetailViewModel = TimeDetailViewModel.GetInstance();
+			timeDetailViewModel.projects.Add((Project)response.Result);
+			timeDetailViewModel.ReloadProjects();
 
 			ProjectModal.IsVisible = false;
 		}
@@ -120,9 +120,9 @@
 				return;
 			}
 
-			var newTimeViewModel = NewTimeViewModel.GetInstance();
-			newTimeViewModel.activities.Add((Activity)response.Result);
-			newTimeViewModel.ReloadActivities();
+			var timeDetailViewModel = TimeDetailViewModel.GetInstance();
+			timeDetailViewModel.activities.Add((Activity)response.Result);
+			timeDetailViewModel.ReloadActivities();
 
 			ActivityModal.IsVisible = false;
 		}
