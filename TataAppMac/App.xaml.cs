@@ -34,6 +34,7 @@
 			{
 				var mainViewModel = MainViewModel.GetInstance();
 				mainViewModel.Employee = employee;
+				mainViewModel.RegisterDevice();
 				MainPage = new MasterPage();
 			}
 			else
@@ -102,6 +103,7 @@
 
 			var mainViewModel = MainViewModel.GetInstance();
 			mainViewModel.Employee = employee;
+			mainViewModel.RegisterDevice();
 			navigationService.SetMainPage("MasterPage");
 		}
 

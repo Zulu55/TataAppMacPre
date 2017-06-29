@@ -1,11 +1,5 @@
-﻿using System;
-
-using Android.App;
-using Android.Content;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
 
 namespace TataAppMac.Droid
@@ -13,8 +7,25 @@ namespace TataAppMac.Droid
     [Activity(Label = "TATA App", Icon = "@drawable/ic_launcher", Theme = "@style/MyTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+		#region Singleton
+		private static MainActivity instance;
+
+		public static MainActivity GetInstance()
+		{
+			if (instance == null)
+			{
+				instance = new MainActivity();
+			}
+
+			return instance;
+		}
+		#endregion
+
+		#region Methods
+		protected override void OnCreate(Bundle bundle)
         {
+			instance = this;
+			
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -24,5 +35,6 @@ namespace TataAppMac.Droid
 			Xamarin.FormsMaps.Init(this, bundle);
 			LoadApplication(new App());
         }
-    }
+		#endregion
+	}
 }

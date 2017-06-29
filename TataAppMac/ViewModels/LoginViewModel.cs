@@ -245,7 +245,8 @@ namespace TataAppMac.ViewModels
 
 			var mainViewModel = MainViewModel.GetInstance();
             mainViewModel.Employee = employee;
-            navigationService.SetMainPage("MasterPage");                                             
+			mainViewModel.RegisterDevice();
+			navigationService.SetMainPage("MasterPage");                                             
 		}
         #endregion
     }

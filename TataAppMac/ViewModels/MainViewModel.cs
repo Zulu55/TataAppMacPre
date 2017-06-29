@@ -4,8 +4,10 @@
     using System.ComponentModel;
     using System.Windows.Input;
 	using GalaSoft.MvvmLight.Command;
-	using TataAppMac.Models;
+    using TataAppMac.Interfaces;
+    using TataAppMac.Models;
 	using TataAppMac.Serviices;
+    using Xamarin.Forms;
 
     public class MainViewModel : INotifyPropertyChanged
     {
@@ -129,10 +131,16 @@
 
 			return instance;
 		}
-		#endregion        
+		#endregion
 
-        #region Methods
-		private void LoadMenu()
+		#region Methods
+		public void RegisterDevice()
+		{
+			var register = DependencyService.Get<IRegisterDevice>();
+			register.RegisterDevice();
+		}
+
+		void LoadMenu()
         {
             Menu.Add(new MenuItemViewModel
             {

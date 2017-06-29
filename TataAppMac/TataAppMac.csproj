@@ -180,6 +180,7 @@
     </Compile>
     <Compile Include="ViewModels\TimeDetailViewModel.cs" />
     <Compile Include="Models\Time2.cs" />
+    <Compile Include="Interfaces\IRegisterDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Net.Http.Extensions">
