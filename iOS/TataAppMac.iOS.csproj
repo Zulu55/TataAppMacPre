@@ -186,6 +186,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="LoginPageRenderer.cs" />
+    <Compile Include="RegistrationDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_launcher.png" />

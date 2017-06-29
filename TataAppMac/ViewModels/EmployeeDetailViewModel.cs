@@ -5,6 +5,7 @@
     using GalaSoft.MvvmLight.Command;
     using TataAppMac.Models;
     using TataAppMac.Serviices;
+    using Xamarin.Forms;
 
     public class EmployeeDetailViewModel : Employee, INotifyPropertyChanged
     {
@@ -111,7 +112,45 @@
                 await dialogService.ShowMessage("Error", "You must enter a message to send.");
                 return;
             }
-        }
+
+			IsRunning = true;
+            IsEnabled = false;
+
+			var checkConnetion = await apiService.CheckConnection();
+			if (!checkConnetion.IsSuccess)
+			{
+                IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", checkConnetion.Message);
+				return;
+			}
+
+			var urlAPI = Application.Current.Resources["URLAPI"].ToString();
+			var mainViewModel = MainViewModel.GetInstance();
+			var from = mainViewModel.Employee;
+			var response = await apiService.SendNotification(
+				urlAPI,
+				"/api",
+				"/Employees/SendNotification",
+                from.TokenType,
+                from.AccessToken,
+                from.EmployeeId.ToString(),
+				employee.EmployeeId.ToString(), 
+                Message);
+
+			if (!response.IsSuccess)
+			{
+				IsRunning = false;
+				IsEnabled = true;
+				await dialogService.ShowMessage("Error", "Error sending the notification, try latter.");
+				return;
+			}
+
+			IsRunning = false;
+			IsEnabled = true;
+			await dialogService.ShowMessage("Ok", "The notification was sent.");
+            Message = string.Empty;
+		}
         #endregion
     }
 }
