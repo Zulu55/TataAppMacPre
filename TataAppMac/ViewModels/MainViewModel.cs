@@ -192,7 +192,7 @@
             get { return new RelayCommand(GoNewTime); }
         }
 
-        private async void GoNewTime()
+        async void GoNewTime()
         {
             NewTime = new NewTimeViewModel();
             await navigationService.Navigate("NewTimePage");
