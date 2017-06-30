@@ -1,5 +1,4 @@
-﻿using System;
-namespace TataAppMac.Droid
+﻿namespace TataAppMac.Droid
 {
     public class Constants
     {

@@ -65,7 +65,7 @@
     <DefineConstants>DEBUG;ENABLE_TEST_CLOUD;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: Juan Carlos Zuluaga Cardona (LJLFW39GCX)</CodesignKey>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchDebug>true</MtouchDebug>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
@@ -143,6 +143,9 @@
     <Reference Include="Xamarin.Auth.iOS">
       <HintPath>..\Components\xamarin.auth-1.2.3.1\lib\ios-unified\Xamarin.Auth.iOS.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Azure.NotificationHubs.iOS">
+      <HintPath>..\packages\Xamarin.Azure.NotificationHubs.iOS.1.2.5.2\lib\Xamarin.iOS10\Xamarin.Azure.NotificationHubs.iOS.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TataAppMac\TataAppMac.csproj">
@@ -187,6 +190,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="LoginPageRenderer.cs" />
     <Compile Include="RegistrationDevice.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\ic_launcher.png" />
@@ -211,6 +215,10 @@
   <ItemGroup>
     <XamarinComponentReference Include="xamarin.auth">
       <Version>1.2.3.1</Version>
+      <Visible>False</Visible>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="azure-messaging">
+      <Version>1.2.5.2</Version>
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
